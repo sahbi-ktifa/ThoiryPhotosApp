@@ -3,11 +3,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Fil d'actualités</ion-title>
+    <ion-title>{{specie.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Fil d'actualités</h3>
+  <img *ngIf="specieUrl" src="{{specieUrl}}"/>
+  <h3>{{specie.name}}</h3>
+  <p>{{specie.description}}</p>
+  <p>{{specie.origin}}</p>
+
 
 </ion-content>

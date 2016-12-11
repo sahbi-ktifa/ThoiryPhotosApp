@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-
-import { NavController } from 'ionic-angular';
-import { Species } from '../species/species';
+import {Component} from "@angular/core";
+import {NavController} from "ionic-angular";
 
 @Component({
   selector: 'page-photos',
@@ -13,9 +11,4 @@ export class Photos {
 
   }
 
-  goTo() {
-    this.navCtrl.push(Species, {
-      speciesId: "1"
-    });
-  }
 }

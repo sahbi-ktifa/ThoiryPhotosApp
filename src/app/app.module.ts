@@ -5,6 +5,8 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { Photos } from '../pages/photos/photos';
 import { Species } from '../pages/species/species';
+import {SpecieDetails} from "../pages/specie-details/specie-details";
+import {SpeciesService} from "./services/species-service";
 
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import { Species } from '../pages/species/species';
     Page1,
     Page2,
     Photos,
-    Species
+    Species,
+    SpecieDetails
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,8 +26,9 @@ import { Species } from '../pages/species/species';
     Page1,
     Page2,
     Photos,
-    Species
+    Species,
+    SpecieDetails
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, SpeciesService]
 })
 export class AppModule {}
