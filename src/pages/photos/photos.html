@@ -8,6 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Fil d'actualités</h3>
-
+  <div class="item" ion-item *ngFor="let pic of pictures">
+    <img src="http://localhost:8080/common/picture/{{specie.id}}/preview?format=THUMB" />
+    <div class="infos">
+      <span class="name">{{specie.name}}</span>
+      <span class="description">{{specie.description}}</span>
+    </div>
+  </div>
 </ion-content>
