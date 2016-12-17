@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
+import {ENV} from "../main.dev";
 
 /*
   Generated class for the SpeciesService provider.
@@ -16,7 +17,7 @@ export class PhotosService {
   }
 
   browse(page: number): Observable<any> {
-    return this.http.get("http://localhost:8080/common/picture?page=" + page)
+    return this.http.get(ENV.API_URL + "/common/picture?page=" + page)
       .map(PhotosService.extractData)
       .catch(PhotosService.handleError);
   }

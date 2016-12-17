@@ -11,7 +11,7 @@
   <ion-list>
     <button class="item" ion-item *ngFor="let specie of species" (click)="goToDetails(specie)">
       <div class="thumbnail">
-        <img src="http://localhost:8080/common/specie/{{specie.id}}/preview?format=THUMB" />
+        <img src="{{baseUrl}}/common/specie/{{specie.id}}/preview?format=THUMB" />
       </div>
       <div class="infos">
         <span class="name">{{specie.name}}</span>

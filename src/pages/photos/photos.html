@@ -8,11 +8,19 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="item" ion-item *ngFor="let pic of pictures">
-    <img src="http://localhost:8080/common/picture/{{specie.id}}/preview?format=THUMB" />
+  <div class="item" ion-item *ngFor="let pic of pictures" >
+    <img src="{{baseUrl}}/common/picture/{{pic.id}}/preview?format=PREVIEW" width="100%"/>
     <div class="infos">
-      <span class="name">{{specie.name}}</span>
-      <span class="description">{{specie.description}}</span>
+      <span class="infos">{{pic.title}} - {{pic.lastModified | date:'shortDate'}} - {{pic.liked}}  <ion-icon name="heart"></ion-icon></span>
+      <span class="animals" *ngIf="pic.animalIds.length > 0">
+
+      </span>
+      <div class="species" *ngIf="pic.speciesIds.length > 0">
+          {{pic.speciesId}}
+          <specie-summary *ngFor="let specieId of pic.speciesIds"
+                          [id]="specieId">
+          </specie-summary>
+      </div>
     </div>
   </div>
 </ion-content>

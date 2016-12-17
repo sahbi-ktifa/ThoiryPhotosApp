@@ -3,6 +3,7 @@ import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {Specie} from "../domain/specie";
+import {ENV} from "../main.dev";
 
 /*
   Generated class for the SpeciesService provider.
@@ -17,13 +18,13 @@ export class SpeciesService {
   }
 
   load(): Observable<Specie[]> {
-    return this.http.get("http://localhost:8080/common/specie")
+    return this.http.get(ENV.API_URL + "/common/specie")
       .map(SpeciesService.extractData)
       .catch(SpeciesService.handleError);
   }
 
   retrieveSpecie(specieId: String) : Observable<Specie> {
-    return this.http.get("http://localhost:8080/common/specie/" + specieId)
+    return this.http.get(ENV.API_URL + "/common/specie/" + specieId)
       .map(SpeciesService.extractData)
       .catch(SpeciesService.handleError);
   }

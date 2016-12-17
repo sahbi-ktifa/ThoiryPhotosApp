@@ -3,6 +3,7 @@ import {NavController} from "ionic-angular";
 import {SpecieDetails} from "../specie-details/specie-details";
 import {Specie} from "../../app/domain/specie";
 import {SpeciesService} from "../../app/services/species-service";
+import {ENV} from "../../app/main.dev";
 
 @Component({
   selector: 'page-species',
@@ -11,6 +12,7 @@ import {SpeciesService} from "../../app/services/species-service";
 export class Species {
   species: Array<Specie> = [];
   errorMessage: string;
+  baseUrl: String = ENV.API_URL;
 
   constructor(public navCtrl: NavController, public speciesService: SpeciesService) {
     this.loadSpecies();

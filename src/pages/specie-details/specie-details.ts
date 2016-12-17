@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {NavController, NavParams} from "ionic-angular";
 import {Specie} from "../../app/domain/specie";
 import {SpeciesService} from "../../app/services/species-service";
+import {ENV} from "../../app/main.dev";
 
 @Component({
   selector: 'specie-details',
@@ -22,7 +23,7 @@ export class SpecieDetails {
 
   private init(specie: Specie) {
       this.specie = specie;
-      this.specieUrl = "http://localhost:8080/common/specie/" + specie.id + "/preview?format=THUMB";
+      this.specieUrl = ENV.API_URL + "/common/specie/" + specie.id + "/preview?format=THUMB";
   }
 
 }
