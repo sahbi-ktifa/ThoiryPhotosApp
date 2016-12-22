@@ -3,7 +3,7 @@ import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {ENV} from "../main.dev";
-import {Photo} from "../domain/photo";
+import {Animal} from "../domain/animal";
 
 /*
   Generated class for the SpeciesService provider.
@@ -12,19 +12,25 @@ import {Photo} from "../domain/photo";
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class PhotosService {
+export class AnimalsService {
 
   constructor(public http: Http) {
   }
 
-  browse(page: number): Observable<Photo[]> {
-    return this.http.get(ENV.API_URL + "/common/picture?page=" + page)
-      .map(PhotosService.extractData)
-      .catch(PhotosService.handleError);
+  load(): Observable<Animal[]> {
+    return this.http.get(ENV.API_URL + "/common/animal")
+      .map(AnimalsService.extractData)
+      .catch(AnimalsService.handleError);
+  }
+
+  retrieveAnimal(animalId: String) : Observable<Animal> {
+    return this.http.get(ENV.API_URL + "/common/animal/" + animalId)
+      .map(AnimalsService.extractData)
+      .catch(AnimalsService.handleError);
   }
 
   private static extractData(res: Response) {
-    return res.json().pictures || { };
+    return res.json() || { };
   }
 
   private static handleError (error: Response | any) {

@@ -1,0 +1,20 @@
+page-animals .item .label {
+  max-height: 75px;
+}
+page-animals .item .thumbnail {
+  float: left;
+  width: 25%;
+}
+page-animals .item .thumbnail img {
+  width: 50px;
+  border-radius: 25px;
+  height: 50px;
+}
+page-animals .item .infos {
+  float: left;
+  width: 75%;
+}
+page-animals .item .infos .name {
+  width: 100%;
+  display: block;
+}

@@ -6,6 +6,7 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { Photos } from '../pages/photos/photos';
 import { Species } from '../pages/species/species';
+import {Animals} from "../pages/animals/animals";
 
 
 @Component({
@@ -24,6 +25,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Fil d\'actualité', component: Photos},
+      { title: 'Les animaux du Parc', component: Animals},
       { title: 'Les espèces du Parc', component: Species}
     ];
 

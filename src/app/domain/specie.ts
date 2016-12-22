@@ -1,5 +1,5 @@
 export class Specie {
-    id: number;
+    id: string;
     name: string;
     origins: string;
     description: string;

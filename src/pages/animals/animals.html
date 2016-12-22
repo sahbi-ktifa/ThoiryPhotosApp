@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Les animaux du Parc</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button class="item" ion-item *ngFor="let animal of animals" (click)="goToDetails(animal)">
+      <div class="thumbnail">
+        <img src="{{baseUrl}}/common/animal/{{animal.id}}/preview?format=THUMB" />
+      </div>
+      <div class="infos">
+        <span class="name">{{animal.name}}</span>
+      </div>
+    </button>
+  </ion-list>
+</ion-content>

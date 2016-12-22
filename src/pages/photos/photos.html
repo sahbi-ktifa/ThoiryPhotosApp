@@ -12,11 +12,12 @@
     <img src="{{baseUrl}}/common/picture/{{pic.id}}/preview?format=PREVIEW" width="100%"/>
     <div class="infos">
       <span class="infos">{{pic.title}} - {{pic.lastModified | date:'shortDate'}} - {{pic.liked}}  <ion-icon name="heart"></ion-icon></span>
-      <span class="animals" *ngIf="pic.animalIds.length > 0">
-
-      </span>
+      <div class="animals" *ngIf="pic.animalIds.length > 0">
+          <animal-summary *ngFor="let animalId of pic.animalIds"
+                [id]="animalId">
+          </animal-summary>
+      </div>
       <div class="species" *ngIf="pic.speciesIds.length > 0">
-          {{pic.speciesId}}
           <specie-summary *ngFor="let specieId of pic.speciesIds"
                           [id]="specieId">
           </specie-summary>
