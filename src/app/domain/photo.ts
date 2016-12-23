@@ -6,5 +6,6 @@ export class Photo {
     binaryId: String;
     title: String;
     liked: number = 0;
+    creationDate: DateTime;
     lastModified: DateTime;
 }

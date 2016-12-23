@@ -39,7 +39,6 @@ export class SpecieSummaryComponent implements OnInit {
   specieUrl: String;
 
   ngOnInit(): void {
-    console.log(this.specieId);
     this.getSpecie();
   }
 

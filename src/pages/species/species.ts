@@ -10,6 +10,7 @@ import {ENV} from "../../app/main.dev";
   templateUrl: 'species.html'
 })
 export class Species {
+  title: String = "Les espèces du Parc";
   species: Array<Specie> = [];
   errorMessage: string;
   baseUrl: String = ENV.API_URL;

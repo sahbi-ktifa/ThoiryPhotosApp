@@ -3,7 +3,8 @@ import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {ENV} from "../main.dev";
-import {Photo} from "../domain/photo";
+import {NativeStorage} from "ionic-native";
+import {Platform} from "ionic-angular";
 
 /*
   Generated class for the SpeciesService provider.
@@ -12,30 +13,28 @@ import {Photo} from "../domain/photo";
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class PhotosService {
+export class AuthService {
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private platform: Platform) {
+    this.platform = platform;
   }
 
-  browse(page: number): Observable<Photo[]> {
-    return this.http.get(ENV.API_URL + "/common/picture?page=" + page)
-      .map(PhotosService.extractData)
-      .catch(PhotosService.handleError);
+  register(username: String): Observable<any> {
+    return this.http.post(ENV.API_URL + "/common/register", username)
+      .map(AuthService.extractData)
+      .catch(AuthService.handleError);
   }
 
-  like(picId: String): Observable<number> {
-    return this.http.post(ENV.API_URL + "/common/picture/" + picId + "/like", {})
-      .map(PhotosService.extractCommonData)
-      .catch(PhotosService.handleError);
-  }
-
-  private static extractCommonData(res: Response) {
-    console.log(res.json());
-    return res.json() || { };
+  storeUser(username: String, passwd: String) {
+    if (this.platform.is('mobileweb')) {
+      localStorage.setItem('user', JSON.stringify({username: username, passwd: passwd}));
+    } else {
+      NativeStorage.setItem('user', {username: username, passwd: passwd});
+    }
   }
 
   private static extractData(res: Response) {
-    return res.json().pictures || { };
+    return res.text();
   }
 
   private static handleError (error: Response | any) {
@@ -50,4 +49,5 @@ export class PhotosService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
+
 }

@@ -10,6 +10,7 @@ import {AnimalDetails} from "../animal-details/animal-details";
   templateUrl: 'animals.html'
 })
 export class Animals {
+  title: String = "Les animaux du Parc";
   animals: Array<Animal> = [];
   errorMessage: string;
   baseUrl: String = ENV.API_URL;

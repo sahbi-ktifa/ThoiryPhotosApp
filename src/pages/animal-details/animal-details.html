@@ -10,6 +10,7 @@
 <ion-content padding>
   <img *ngIf="animalUrl" src="{{animalUrl}}"/>
   <h3>{{animal.name}}</h3>
+  <specie-summary *ngIf="animalUrl" [id]="animal.specieId"></specie-summary>
   <p>{{animal.age}}</p>
 
 </ion-content>

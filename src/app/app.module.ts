@@ -1,5 +1,5 @@
 import {NgModule, ErrorHandler} from "@angular/core";
-import {IonicApp, IonicModule, IonicErrorHandler} from "ionic-angular";
+import {IonicApp, IonicModule, IonicErrorHandler, Modal} from "ionic-angular";
 import {MyApp} from "./app.component";
 import {Photos} from "../pages/photos/photos";
 import {Species} from "../pages/species/species";
@@ -11,6 +11,9 @@ import {AnimalsService} from "./services/animals-service";
 import {AnimalDetails} from "../pages/animal-details/animal-details";
 import {Animals} from "../pages/animals/animals";
 import {AnimalSummaryComponent} from "./component/animal-summary.component";
+import {PictureLikableComponent} from "./component/picture-likable.component";
+import {AuthComponent, Register} from "./component/auth.component";
+import {AuthService} from "./services/auth-service";
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import {AnimalSummaryComponent} from "./component/animal-summary.component";
     SpecieSummaryComponent,
     Animals,
     AnimalDetails,
-    AnimalSummaryComponent
+    AnimalSummaryComponent,
+    PictureLikableComponent,
+    AuthComponent,
+    Register
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -35,8 +41,11 @@ import {AnimalSummaryComponent} from "./component/animal-summary.component";
     SpecieSummaryComponent,
     Animals,
     AnimalDetails,
-    AnimalSummaryComponent
+    AnimalSummaryComponent,
+    PictureLikableComponent,
+    AuthComponent,
+    Register
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, SpeciesService, PhotosService, AnimalsService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, SpeciesService, PhotosService, AnimalsService, AuthService]
 })
 export class AppModule {}

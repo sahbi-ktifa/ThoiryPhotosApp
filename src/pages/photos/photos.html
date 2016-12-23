@@ -4,14 +4,15 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Fil d'actualités</ion-title>
+    <auth></auth>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <div class="item" ion-item *ngFor="let pic of pictures" >
-    <img src="{{baseUrl}}/common/picture/{{pic.id}}/preview?format=PREVIEW" width="100%"/>
+    <picture-likable [id]="pic.id"></picture-likable>
     <div class="infos">
-      <span class="infos">{{pic.title}} - {{pic.lastModified | date:'shortDate'}} - {{pic.liked}}  <ion-icon name="heart"></ion-icon></span>
+      <span class="infos">{{pic.title}} - {{pic.creationDate | date:'shortDate'}} - {{pic.liked}}  <ion-icon name="heart"></ion-icon></span>
       <div class="animals" *ngIf="pic.animalIds.length > 0">
           <animal-summary *ngFor="let animalId of pic.animalIds"
                 [id]="animalId">
