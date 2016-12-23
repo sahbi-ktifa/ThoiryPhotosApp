@@ -1,6 +1,8 @@
 import {Component, Input} from "@angular/core";
 import {ENV} from "../main.dev";
 import {PhotosService} from "../services/photos-service";
+import {Platform, Events} from "ionic-angular";
+import {AuthService} from "../services/auth-service";
 
 @Component({
   selector: 'picture-likable',
@@ -15,15 +17,32 @@ export class PictureLikableComponent {
   @Input('format') format: String = "PREVIEW";
   baseUrl: String = ENV.API_URL;
 
-  constructor(private photoService: PhotosService) {
+  constructor(private photoService: PhotosService, private platform: Platform, private events: Events, private authService: AuthService) {
+    this.platform = platform;
+    this.events = events;
   }
 
   like() {
-    /*if (this.storage.getItem("likes") && JSON.parse(this.storage.getItem("likes")).indexOf(this.picId) > -1) {
+    if (!this.authService.retrieveUser()) {
       return;
     }
-    let likes = this.storage.getItem("likes") ? JSON.parse(this.storage.getItem("likes")).push(this.picId) : [this.picId];
-    this.storage.setItem("likes", JSON.stringify(likes))*/
-    this.photoService.like(this.picId).subscribe();
+    if (this.platform.is('mobileweb')) {
+      if (localStorage.getItem("likes") && JSON.parse(localStorage.getItem("likes")).indexOf(this.picId) > -1) {
+        return;
+      }
+      this.photoService.like(this.picId).subscribe(
+        _likes => this.likedLocalStorage(),
+        error =>  console.log(error)
+      );
+    } else {
+      //todo : check nativeStorage
+      this.photoService.like(this.picId).subscribe();
+    }
+  }
+
+  private likedLocalStorage() {
+    let likes = localStorage.getItem("likes") ? JSON.parse(localStorage.getItem("likes")).push(this.picId) : [this.picId];
+    localStorage.setItem("likes", JSON.stringify(likes));
+    this.events.publish('photo:liked', this.picId);
   }
 }

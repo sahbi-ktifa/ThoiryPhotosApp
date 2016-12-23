@@ -14,6 +14,7 @@ import {AnimalSummaryComponent} from "./component/animal-summary.component";
 import {PictureLikableComponent} from "./component/picture-likable.component";
 import {AuthComponent, Register} from "./component/auth.component";
 import {AuthService} from "./services/auth-service";
+import {PictureLikedComponent} from "./component/picture-liked.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {AuthService} from "./services/auth-service";
     AnimalDetails,
     AnimalSummaryComponent,
     PictureLikableComponent,
+    PictureLikedComponent,
     AuthComponent,
     Register
   ],
@@ -43,6 +45,7 @@ import {AuthService} from "./services/auth-service";
     AnimalDetails,
     AnimalSummaryComponent,
     PictureLikableComponent,
+    PictureLikedComponent,
     AuthComponent,
     Register
   ],

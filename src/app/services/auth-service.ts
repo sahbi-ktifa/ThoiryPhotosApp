@@ -33,6 +33,14 @@ export class AuthService {
     }
   }
 
+  retrieveUser() {
+    if (this.platform.is('mobileweb')) {
+      return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
+    } else {
+      //todo : use NativeStorage
+    }
+  }
+
   private static extractData(res: Response) {
     return res.text();
   }

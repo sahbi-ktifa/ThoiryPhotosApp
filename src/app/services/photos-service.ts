@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {ENV} from "../main.dev";
 import {Photo} from "../domain/photo";
+import {AuthService} from "./auth-service";
 
 /*
   Generated class for the SpeciesService provider.
@@ -14,7 +15,7 @@ import {Photo} from "../domain/photo";
 @Injectable()
 export class PhotosService {
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private authService: AuthService) {
   }
 
   browse(page: number): Observable<Photo[]> {
@@ -24,13 +25,14 @@ export class PhotosService {
   }
 
   like(picId: String): Observable<number> {
-    return this.http.post(ENV.API_URL + "/common/picture/" + picId + "/like", {})
+    let headers = new Headers();
+    headers.append('Authorization','Basic ' + btoa(this.authService.retrieveUser().username + ':' + this.authService.retrieveUser().passwd));
+    return this.http.post(ENV.API_URL + "/api/picture/" + picId + "/like", {}, {headers: headers})
       .map(PhotosService.extractCommonData)
       .catch(PhotosService.handleError);
   }
 
   private static extractCommonData(res: Response) {
-    console.log(res.json());
     return res.json() || { };
   }
 
