@@ -18,9 +18,9 @@ export class PhotosService {
   constructor(public http: Http, private authService: AuthService) {
   }
 
-  browse(page: number): Observable<Photo[]> {
+  browse(page: number): Observable<any> {
     return this.http.get(ENV.API_URL + "/common/picture?page=" + page)
-      .map(PhotosService.extractData)
+      .map(PhotosService.extractCommonData)
       .catch(PhotosService.handleError);
   }
 
@@ -34,10 +34,6 @@ export class PhotosService {
 
   private static extractCommonData(res: Response) {
     return res.json() || { };
-  }
-
-  private static extractData(res: Response) {
-    return res.json().pictures || { };
   }
 
   private static handleError (error: Response | any) {

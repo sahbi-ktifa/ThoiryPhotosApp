@@ -41,7 +41,8 @@ export class PictureLikableComponent {
   }
 
   private likedLocalStorage() {
-    let likes = localStorage.getItem("likes") ? JSON.parse(localStorage.getItem("likes")).push(this.picId) : [this.picId];
+    let likes = localStorage.getItem("likes") ? JSON.parse(localStorage.getItem("likes")) : [];
+    likes.push(this.picId);
     localStorage.setItem("likes", JSON.stringify(likes));
     this.events.publish('photo:liked', this.picId);
   }

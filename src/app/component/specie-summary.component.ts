@@ -61,7 +61,6 @@ export class SpecieSummaryComponent implements OnInit {
   private init(specie: Specie) {
     this.specie = specie;
     this.specieUrl = ENV.API_URL + "/common/specie/" + specie.id + "/preview?format=THUMB";
-    console.log(this.specieUrl);
   }
 
 }

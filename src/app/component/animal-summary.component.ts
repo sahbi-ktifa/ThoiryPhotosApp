@@ -39,7 +39,6 @@ export class AnimalSummaryComponent implements OnInit {
   animalUrl: String;
 
   ngOnInit(): void {
-    console.log(this.animalId);
     this.getAnimal();
   }
 
@@ -62,7 +61,6 @@ export class AnimalSummaryComponent implements OnInit {
   private init(animal: Animal) {
     this.animal = animal;
     this.animalUrl = ENV.API_URL + "/common/animal/" + animal.id + "/preview?format=THUMB";
-    console.log(this.animalUrl);
   }
 
 }
