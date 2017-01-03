@@ -10,20 +10,7 @@
 
 <ion-content padding>
   <div class="item" ion-item *ngFor="let pic of pictures" >
-    <picture-likable [id]="pic.id"></picture-likable>
-    <div class="infos">
-      <span class="infos">{{pic.title}} - {{pic.creationDate | date:'shortDate'}} - <picture-liked [liked]="pic.liked" [id]="pic.id"></picture-liked></span>
-      <div class="animals" *ngIf="pic.animalIds.length > 0">
-          <animal-summary *ngFor="let animalId of pic.animalIds"
-                [id]="animalId">
-          </animal-summary>
-      </div>
-      <div class="species" *ngIf="pic.speciesIds.length > 0">
-          <specie-summary *ngFor="let specieId of pic.speciesIds"
-                          [id]="specieId">
-          </specie-summary>
-      </div>
-    </div>
+    <picture [picture]="pic"></picture>
   </div>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content

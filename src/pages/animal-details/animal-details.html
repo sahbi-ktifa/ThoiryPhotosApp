@@ -9,8 +9,22 @@
 
 <ion-content padding>
   <img *ngIf="animalUrl" src="{{animalUrl}}"/>
-  <h3>{{animal.name}}</h3>
-  <specie-summary *ngIf="animalUrl" [id]="animal.specieId"></specie-summary>
-  <p>{{animal.age}}</p>
-
+  <h3>Nom : {{animal.name}}</h3>
+  <p>Age : {{animal.age}} an(s)</p>
+  <p><span class="label">Espèce : </span><specie-summary *ngIf="animalUrl" [id]="animal.specieId"></specie-summary></p>
+  <div class="sibling" *ngIf="siblings.length > 0">
+    <span class="label">Mes frères et soeurs :</span>
+    <animal-summary *ngFor="let sibling of siblings"
+                    [id]="sibling.id">
+    </animal-summary>
+  </div>
+  <h2>Mes photos</h2>
+  <!--<div class="item" ion-item *ngFor="let pic of pictures" >
+    <picture [picture]="pic"></picture>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Chargement en cours..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
 </ion-content>

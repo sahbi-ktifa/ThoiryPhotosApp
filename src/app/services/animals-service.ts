@@ -29,6 +29,12 @@ export class AnimalsService {
       .catch(AnimalsService.handleError);
   }
 
+  retrieveAnimalSiblings(animalId: String) : Observable<Array<Animal>> {
+    return this.http.get(ENV.API_URL + "/common/animal/" + animalId + "/siblings")
+      .map(AnimalsService.extractData)
+      .catch(AnimalsService.handleError);
+  }
+
   private static extractData(res: Response) {
     return res.json() || { };
   }
