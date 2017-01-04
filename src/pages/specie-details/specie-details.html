@@ -12,6 +12,21 @@
   <h3>{{specie.name}}</h3>
   <p>{{specie.description}}</p>
   <p>{{specie.origin}}</p>
-
-
+  <div class="animals" *ngIf="animals.length > 0">
+    <p>Mes réprésentants :</p>
+    <animal-summary *ngFor="let animal of animals"
+                    [id]="animal.id">
+    </animal-summary>
+  </div>
+  <div class="pictures" *ngIf="pictures.length > 0">
+    <h2>Mes photos</h2>
+    <div class="item" ion-item *ngFor="let pic of pictures" >
+      <picture [picture]="pic"></picture>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Chargement en cours..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 </ion-content>

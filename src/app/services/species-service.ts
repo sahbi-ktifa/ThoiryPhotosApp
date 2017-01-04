@@ -29,6 +29,12 @@ export class SpeciesService {
       .catch(SpeciesService.handleError);
   }
 
+  retrieveSpecieAnimals(specieId: string) {
+    return this.http.get(ENV.API_URL + "/common/specie/" + specieId + "/animals")
+      .map(SpeciesService.extractData)
+      .catch(SpeciesService.handleError);
+  }
+
   private static extractData(res: Response) {
     return res.json() || { };
   }

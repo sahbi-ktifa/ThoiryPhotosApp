@@ -24,6 +24,12 @@ export class PhotosService {
       .catch(PhotosService.handleError);
   }
 
+  browseWithId(page: number, param: string, specieId: string): Observable<any> {
+    return this.http.get(ENV.API_URL + "/common/picture?page=" + page + "&" + param + "=" + specieId)
+      .map(PhotosService.extractCommonData)
+      .catch(PhotosService.handleError);
+  }
+
   like(picId: String): Observable<number> {
     let headers = new Headers();
     headers.append('Authorization','Basic ' + btoa(this.authService.retrieveUser().username + ':' + this.authService.retrieveUser().passwd));
