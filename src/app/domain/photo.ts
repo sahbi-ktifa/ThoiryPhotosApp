@@ -8,4 +8,5 @@ export class Photo {
     liked: number = 0;
     creationDate: DateTime;
     lastModified: DateTime;
+    username: String;
 }

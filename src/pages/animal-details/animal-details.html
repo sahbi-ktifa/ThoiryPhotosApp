@@ -4,13 +4,14 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{animal.name}}</ion-title>
+    <auth></auth>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <img *ngIf="animalUrl" src="{{animalUrl}}"/>
   <h3>Nom : {{animal.name}}</h3>
-  <p>Age : {{animal.age}} an(s)</p>
+  <p>Age : {{getAge(animal.birthYear)}} an(s)</p>
   <p><span class="label">Espèce : </span><specie-summary *ngIf="animalUrl" [id]="animal.specieId"></specie-summary></p>
   <div class="sibling" *ngIf="siblings.length > 0">
     <p>Mes frères et soeurs :</p>

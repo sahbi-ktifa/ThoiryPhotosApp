@@ -22,13 +22,13 @@ export class PictureLikedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.platform.is('mobileweb')) {
+    //if (this.platform.is('mobileweb')) {
       if (localStorage.getItem("likes") && JSON.parse(localStorage.getItem("likes")).indexOf(this.picId) > -1) {
         this.color = 'danger';
       }
-    } else {
+    /*} else {
       //todo : check nativeStorage
-    }
+    }*/
 
     this.events.subscribe('photo:liked', (picId) => {
       if (picId == this.picId) {

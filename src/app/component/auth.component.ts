@@ -24,7 +24,9 @@ export class AuthComponent implements OnInit {
   username: String;
 
   ngOnInit(): void {
-    this.checkAuth();
+    this.platform.ready().then(() => {
+      this.checkAuth();
+    });
   }
 
   constructor(public modalCtrl: ModalController, private platform: Platform) {
@@ -40,18 +42,18 @@ export class AuthComponent implements OnInit {
   }
 
   private checkAuth() {
-    if (this.platform.is('mobileweb')) {
+    //if (this.platform.is('mobileweb')) {
       let user = localStorage.getItem('user');
       if (user) {
         this.username = JSON.parse(user).username;
       }
-    } else {
+    /*} else {
       NativeStorage.getItem('user')
         .then(
           data => this.username = data.user,
           error => console.error(error)
         );
-    }
+    }*/
   }
 }
 

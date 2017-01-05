@@ -41,6 +41,13 @@ export class AnimalDetails implements OnInit {
     }
   }
 
+  public getAge(date:string) {
+    var today = new Date();
+    var birthDate = new Date(date);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    return age > 0 ? age : 1;
+  }
+
   private init(animal: Animal) {
       this.animal = animal;
       this.animalUrl = ENV.API_URL + "/common/animal/" + animal.id + "/preview?format=THUMB";

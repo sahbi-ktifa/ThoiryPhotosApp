@@ -8,9 +8,10 @@ import {Photo} from "../domain/photo";
 @Component({
   selector: 'picture',
   template:`
+    <div class="title">{{pic.title}}</div> 
     <picture-likable [id]="pic.id"></picture-likable>
     <div class="infos">
-      <span class="infos">{{pic.title}} - {{pic.creationDate | date:'dd/MM/yyyy'}} - <picture-liked [liked]="pic.liked" [id]="pic.id"></picture-liked></span>
+      <div class="infos">Par <span class="user">{{pic.username}}</span> - <span class="date">{{calcInterval(pic.creationDate)}}</span> <picture-liked [liked]="pic.liked" [id]="pic.id"></picture-liked></div>
       <div class="animals" *ngIf="pic.animalIds.length > 0">
           <animal-summary *ngFor="let animalId of pic.animalIds"
                 [id]="animalId">
@@ -23,7 +24,16 @@ import {Photo} from "../domain/photo";
       </div>
     </div>    
   `,
-  styles: []
+  styles: [`
+    .infos .infos .user {
+      font-style: italic;
+      color: #82abc3;
+    }
+    .infos .infos .date {
+      color: #b7b7b7;
+      float: right;
+    }
+  `]
 })
 
 export class PictureComponent {
@@ -31,5 +41,17 @@ export class PictureComponent {
 
   constructor() {
 
+  }
+
+  public calcInterval(date) {
+    let dayInterval = this.dayDiff(new Date(date));
+    return Number(dayInterval) > 0 ? "Il y a " + dayInterval + " jour(s)" : "Il y a " + Math.round(Math.abs((date - new Date().getTime()) / 3600000)) + " heure(s)";
+  }
+
+  private dayDiff(d1)
+  {
+    d1 = d1.getTime() / 86400000;
+    let d2 = new Date().getTime() / 86400000;
+    return Number(d2 - d1).toFixed(0);
   }
 }
