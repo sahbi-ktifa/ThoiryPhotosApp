@@ -15,4 +15,6 @@ How to install :
 
 `$ ionic serve`
 
+* Or start app using emulator:
 
+`$ ionic emulate -l -c android`

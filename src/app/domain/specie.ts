@@ -1,6 +1,6 @@
 export class Specie {
     id: string;
     name: string;
-    origins: string;
+    origin: string;
     description: string;
 }

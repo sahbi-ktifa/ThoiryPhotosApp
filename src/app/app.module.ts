@@ -17,6 +17,8 @@ import {AuthService} from "./services/auth-service";
 import {PictureLikedComponent} from "./component/picture-liked.component";
 import {PictureComponent} from "./component/picture.component";
 import {PictureInfiniteComponent} from "./component/picture-infinite.component";
+import {PictureUploaderComponent} from "./component/picture-uploader.component";
+import {Uploader} from "./component/uploader.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {PictureInfiniteComponent} from "./component/picture-infinite.component";
     PictureLikableComponent,
     PictureLikedComponent,
     AuthComponent,
-    Register
+    Register,
+    PictureUploaderComponent,
+    Uploader
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -51,7 +55,9 @@ import {PictureInfiniteComponent} from "./component/picture-infinite.component";
     PictureLikableComponent,
     PictureLikedComponent,
     AuthComponent,
-    Register
+    Register,
+    PictureUploaderComponent,
+    Uploader
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, SpeciesService, PhotosService, AnimalsService, AuthService]
 })

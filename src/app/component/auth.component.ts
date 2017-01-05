@@ -66,8 +66,7 @@ export class AuthComponent implements OnInit {
         </ion-title>
         <ion-buttons start>
           <button ion-button (click)="dismiss()">
-            <span color="primary" showWhen="ios">Annuler</span>
-            <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            <ion-icon name="md-close"></ion-icon>
           </button>
         </ion-buttons>
       </ion-toolbar>
