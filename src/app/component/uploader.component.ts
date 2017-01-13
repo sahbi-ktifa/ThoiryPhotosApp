@@ -1,6 +1,7 @@
 import {Camera} from "ionic-native";
 import {LoadingController, ViewController, AlertController} from "ionic-angular";
 import {Component} from "@angular/core";
+import {Photo} from "../domain/photo";
 
 @Component({
   template:`
@@ -51,6 +52,7 @@ export class Uploader {
   base64Image: string;
   imageUri: string;
   mode: string;
+  pic: Photo;
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController, private alertCtrl: AlertController) {
   }

@@ -2,10 +2,11 @@ import {Component, OnInit} from "@angular/core";
 import {NavController, NavParams} from "ionic-angular";
 import {Specie} from "../../app/domain/specie";
 import {SpeciesService} from "../../app/services/species-service";
-import {ENV} from "../../app/main.dev";
+
 import {Animal} from "../../app/domain/animal";
 import {Photo} from "../../app/domain/photo";
 import {PhotosService} from "../../app/services/photos-service";
+import {ENV} from "../../app/app.module";
 
 @Component({
   selector: 'specie-details',

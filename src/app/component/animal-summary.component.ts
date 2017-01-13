@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {ENV} from "../main.dev";
 import {NavController} from "ionic-angular";
 import {AnimalsService} from "../services/animals-service";
 import {AnimalDetails} from "../../pages/animal-details/animal-details";
 import {Animal} from "../domain/animal";
+import {ENV} from "../app.module";
 
 @Component({
   selector: 'animal-summary',

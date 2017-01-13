@@ -3,7 +3,8 @@ import {NavController} from "ionic-angular";
 import {SpecieDetails} from "../specie-details/specie-details";
 import {Specie} from "../../app/domain/specie";
 import {SpeciesService} from "../../app/services/species-service";
-import {ENV} from "../../app/main.dev";
+import {ENV} from "../../app/app.module";
+
 
 @Component({
   selector: 'page-species',

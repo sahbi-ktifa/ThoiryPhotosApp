@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ModalController, ViewController, Platform, LoadingController, AlertController} from "ionic-angular";
 import {AuthService} from "../services/auth-service";
-import {NativeStorage} from "ionic-native";
 
 @Component({
   selector: 'auth',

@@ -1,18 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
-
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
-import { Photos } from '../pages/photos/photos';
-import { Species } from '../pages/species/species';
+import {Component, ViewChild, OnInit} from "@angular/core";
+import {Nav, Platform} from "ionic-angular";
+import {StatusBar, Splashscreen} from "ionic-native";
+import {Photos} from "../pages/photos/photos";
+import {Species} from "../pages/species/species";
 import {Animals} from "../pages/animals/animals";
 
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = Photos;
@@ -20,6 +17,10 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform) {
+
+  }
+
+  ngOnInit(): void {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -28,8 +29,8 @@ export class MyApp {
       { title: 'Les animaux du Parc', component: Animals},
       { title: 'Les espèces du Parc', component: Species}
     ];
-
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {

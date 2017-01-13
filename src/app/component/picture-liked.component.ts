@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {ENV} from "../main.dev";
-import {PhotosService} from "../services/photos-service";
 import {Platform, Events} from "ionic-angular";
 
 @Component({

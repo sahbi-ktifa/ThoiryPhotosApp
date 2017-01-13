@@ -1,8 +1,9 @@
 import {Component, Input} from "@angular/core";
-import {ENV} from "../main.dev";
+
 import {PhotosService} from "../services/photos-service";
 import {Platform, Events} from "ionic-angular";
 import {AuthService} from "../services/auth-service";
+import {ENV} from "../app.module";
 
 @Component({
   selector: 'picture-likable',

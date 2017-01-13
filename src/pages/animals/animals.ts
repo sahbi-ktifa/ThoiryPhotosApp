@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
 import {NavController} from "ionic-angular";
-import {ENV} from "../../app/main.dev";
 import {AnimalsService} from "../../app/services/animals-service";
 import {Animal} from "../../app/domain/animal";
 import {AnimalDetails} from "../animal-details/animal-details";
+import {ENV} from "../../app/app.module";
 
 @Component({
   selector: 'page-animals',

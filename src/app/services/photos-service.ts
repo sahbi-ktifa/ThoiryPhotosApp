@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import {Http, Response, Headers} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
-import {ENV} from "../main.dev";
-import {Photo} from "../domain/photo";
+
 import {AuthService} from "./auth-service";
+import {ENV} from "../app.module";
 
 /*
   Generated class for the SpeciesService provider.

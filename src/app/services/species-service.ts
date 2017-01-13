@@ -3,7 +3,8 @@ import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {Specie} from "../domain/specie";
-import {ENV} from "../main.dev";
+import {ENV} from "../app.module";
+
 
 /*
   Generated class for the SpeciesService provider.

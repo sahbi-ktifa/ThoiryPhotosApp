@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {SpeciesService} from "../services/species-service";
 import {Specie} from "../domain/specie";
-import {ENV} from "../main.dev";
+
 import {SpecieDetails} from "../../pages/specie-details/specie-details";
 import {NavController} from "ionic-angular";
+import {ENV} from "../app.module";
 
 @Component({
   selector: 'specie-summary',

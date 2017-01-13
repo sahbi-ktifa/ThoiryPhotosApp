@@ -1,5 +1,5 @@
 import {NgModule, ErrorHandler} from "@angular/core";
-import {IonicApp, IonicModule, IonicErrorHandler, Modal} from "ionic-angular";
+import {IonicApp, IonicModule, IonicErrorHandler} from "ionic-angular";
 import {MyApp} from "./app.component";
 import {Photos} from "../pages/photos/photos";
 import {Species} from "../pages/species/species";
@@ -62,3 +62,7 @@ import {Uploader} from "./component/uploader.component";
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, SpeciesService, PhotosService, AnimalsService, AuthService]
 })
 export class AppModule {}
+
+export const ENV = {
+  API_URL    : 'http://thoiryphotos-dev.herokuapp.com'
+};
