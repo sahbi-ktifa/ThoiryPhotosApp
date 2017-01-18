@@ -4,6 +4,7 @@ import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {Animal} from "../domain/animal";
 import {ENV} from "../app.module";
+import {LoadingController} from "ionic-angular";
 
 /*
   Generated class for the SpeciesService provider.
@@ -14,32 +15,42 @@ import {ENV} from "../app.module";
 @Injectable()
 export class AnimalsService {
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private loadingCtrl: LoadingController) {
   }
 
   load(): Observable<Animal[]> {
+    let loading = this.loadingCtrl.create({
+      content: 'Veuillez patienter...'
+    });
+    loading.present();
     return this.http.get(ENV.API_URL + "/common/animal")
-      .map(AnimalsService.extractData)
-      .catch(AnimalsService.handleError);
+      .map(d => AnimalsService.extractData(d, loading))
+      .catch(e => AnimalsService.handleError(e, loading));
   }
 
   retrieveAnimal(animalId: String) : Observable<Animal> {
     return this.http.get(ENV.API_URL + "/common/animal/" + animalId)
-      .map(AnimalsService.extractData)
-      .catch(AnimalsService.handleError);
+      .map(d => AnimalsService.extractData(d, false))
+      .catch(e => AnimalsService.handleError(e, false));
   }
 
   retrieveAnimalSiblings(animalId: String) : Observable<Array<Animal>> {
     return this.http.get(ENV.API_URL + "/common/animal/" + animalId + "/siblings")
-      .map(AnimalsService.extractData)
-      .catch(AnimalsService.handleError);
+      .map(d => AnimalsService.extractData(d, false))
+      .catch(e => AnimalsService.handleError(e, false));
   }
 
-  private static extractData(res: Response) {
+  private static extractData(res: Response, loading) {
+    if (loading) {
+      loading.dismiss();
+    }
     return res.json() || { };
   }
 
-  private static handleError (error: Response | any) {
+  private static handleError (error: Response | any, loading) {
+    if (loading) {
+      loading.dismiss();
+    }
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';

@@ -4,6 +4,7 @@ import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {Specie} from "../domain/specie";
 import {ENV} from "../app.module";
+import {LoadingController} from "ionic-angular";
 
 
 /*
@@ -15,32 +16,42 @@ import {ENV} from "../app.module";
 @Injectable()
 export class SpeciesService {
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private loadingCtrl: LoadingController) {
   }
 
   load(): Observable<Specie[]> {
+    let loading = this.loadingCtrl.create({
+      content: 'Veuillez patienter...'
+    });
+    loading.present();
     return this.http.get(ENV.API_URL + "/common/specie")
-      .map(SpeciesService.extractData)
-      .catch(SpeciesService.handleError);
+      .map(d => SpeciesService.extractData(d, loading))
+      .catch(e => SpeciesService.handleError(e, loading));
   }
 
   retrieveSpecie(specieId: String) : Observable<Specie> {
     return this.http.get(ENV.API_URL + "/common/specie/" + specieId)
-      .map(SpeciesService.extractData)
-      .catch(SpeciesService.handleError);
+      .map(d => SpeciesService.extractData(d, false))
+      .catch(e => SpeciesService.handleError(e, false));
   }
 
   retrieveSpecieAnimals(specieId: string) {
     return this.http.get(ENV.API_URL + "/common/specie/" + specieId + "/animals")
-      .map(SpeciesService.extractData)
-      .catch(SpeciesService.handleError);
+      .map(d => SpeciesService.extractData(d, false))
+      .catch(e => SpeciesService.handleError(e, false));
   }
 
-  private static extractData(res: Response) {
+  private static extractData(res: Response, loading) {
+    if (loading) {
+      loading.dismiss();
+    }
     return res.json() || { };
   }
 
-  private static handleError (error: Response | any) {
+  private static handleError (error: Response | any, loading) {
+    if (loading) {
+      loading.dismiss();
+    }
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';

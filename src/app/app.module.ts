@@ -65,4 +65,5 @@ export class AppModule {}
 
 export const ENV = {
   API_URL    : 'http://thoiryphotos-dev.herokuapp.com'
+  //API_URL    : 'http://localhost:8080'
 };

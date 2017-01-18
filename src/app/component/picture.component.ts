@@ -45,7 +45,12 @@ export class PictureComponent {
 
   public calcInterval(date) {
     let dayInterval = this.dayDiff(new Date(date));
-    return Number(dayInterval) > 0 ? "Il y a " + dayInterval + " jour(s)" : "Il y a " + Math.round(Math.abs((date - new Date().getTime()) / 3600000)) + " heure(s)";
+    return Number(dayInterval) > 0 ? "Il y a " + dayInterval + " jour(s)" : this.calcDayInterval(date);
+  }
+
+  private calcDayInterval(date) {
+    let val = Math.round(Math.abs((date - new Date().getTime()) / 3600000));
+    return val > 0 ? "Il y a " + val + " heure(s)" : "Maintenant";
   }
 
   private dayDiff(d1)

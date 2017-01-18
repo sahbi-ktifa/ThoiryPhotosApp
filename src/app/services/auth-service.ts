@@ -27,19 +27,19 @@ export class AuthService {
   }
 
   storeUser(username: String, passwd: String) {
-    if (this.platform.is('mobileweb')) {
+    //if (this.platform.is('mobileweb')) {
       localStorage.setItem('user', JSON.stringify({username: username, passwd: passwd}));
-    } else {
+    /*} else {
       NativeStorage.setItem('user', {username: username, passwd: passwd});
-    }
+    }*/
   }
 
   retrieveUser() {
-    if (this.platform.is('mobileweb')) {
+    //if (this.platform.is('mobileweb')) {
       return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined;
-    } else {
+    /*} else {
       //todo : use NativeStorage
-    }
+    }*/
   }
 
   private static extractData(res: Response) {

@@ -27,7 +27,7 @@ export class PictureLikableComponent {
     if (!this.authService.retrieveUser()) {
       return;
     }
-    if (this.platform.is('mobileweb')) {
+    //if (this.platform.is('mobileweb')) {
       if (localStorage.getItem("likes") && JSON.parse(localStorage.getItem("likes")).indexOf(this.picId) > -1) {
         return;
       }
@@ -35,10 +35,10 @@ export class PictureLikableComponent {
         _likes => this.likedLocalStorage(),
         error =>  console.log(error)
       );
-    } else {
+    /*} else {
       //todo : check nativeStorage
       this.photoService.like(this.picId).subscribe();
-    }
+    }*/
   }
 
   private likedLocalStorage() {

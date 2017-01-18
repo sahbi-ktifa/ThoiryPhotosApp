@@ -5,7 +5,9 @@ import {Uploader} from "./uploader.component";
 @Component({
   selector: 'picture-uploader',
   template:`
-     <ion-icon name="cloud-upload" (click)="doUpload()"></ion-icon>    
+    <button ion-button>
+      <ion-icon name="cloud-upload" (click)="doUpload()"></ion-icon>
+    </button>    
   `,
   styles: []
 })
@@ -37,8 +39,8 @@ export class PictureUploaderComponent implements OnInit {
       });
       alert.present();
     } else {
-      let registerModal = this.modalCtrl.create(Uploader);
-      registerModal.present();
+      let uploaderModal = this.modalCtrl.create(Uploader);
+      uploaderModal.present();
     }
   }
 }
