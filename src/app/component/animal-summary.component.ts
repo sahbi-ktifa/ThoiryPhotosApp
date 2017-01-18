@@ -35,6 +35,7 @@ import {ENV} from "../app.module";
 
 export class AnimalSummaryComponent implements OnInit {
   @Input('id') animalId: String;
+  @Input('clickable') clickable: boolean = true;
   animal: Animal;
   animalUrl: String;
 
@@ -53,9 +54,11 @@ export class AnimalSummaryComponent implements OnInit {
   }
 
   goToAnimal(): void {
-    this.navCtrl.push(AnimalDetails, {
-      animalId: this.animalId
-    });
+    if (this.clickable) {
+      this.navCtrl.push(AnimalDetails, {
+        animalId: this.animalId
+      });
+    }
   }
 
   private init(animal: Animal) {

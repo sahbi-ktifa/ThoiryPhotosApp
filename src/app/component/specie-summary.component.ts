@@ -36,6 +36,7 @@ import {ENV} from "../app.module";
 
 export class SpecieSummaryComponent implements OnInit {
   @Input('id') specieId: String;
+  @Input('clickable') clickable: boolean = true;
   specie: Specie;
   specieUrl: String;
 
@@ -54,9 +55,11 @@ export class SpecieSummaryComponent implements OnInit {
   }
 
   goToSpecie(): void {
-    this.navCtrl.push(SpecieDetails, {
-      specieId: this.specieId
-    });
+    if (this.clickable) {
+      this.navCtrl.push(SpecieDetails, {
+        specieId: this.specieId
+      });
+    }
   }
 
   private init(specie: Specie) {

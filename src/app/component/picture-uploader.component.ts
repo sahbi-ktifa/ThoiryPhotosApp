@@ -5,11 +5,16 @@ import {Uploader} from "./uploader.component";
 @Component({
   selector: 'picture-uploader',
   template:`
-    <button ion-button>
-      <ion-icon name="cloud-upload" (click)="doUpload()"></ion-icon>
-    </button>    
+  <ion-fab>
+    <button ion-fab color="primary" (click)="doUpload()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+  </ion-fab>
   `,
-  styles: []
+  styles: [`
+    :host { right: 15px; bottom: 15px; }
+    :host ion-fab { position: static; }
+  `]
 })
 
 export class PictureUploaderComponent implements OnInit {

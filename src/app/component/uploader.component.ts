@@ -91,7 +91,7 @@ export class Uploader {
     if (!this.pic) {
       return true;
     } else if (this.pic && this.pic.title && this.pic.title.length == 0) {
-    return true;
+      return true;
     }
     return false;
   }
