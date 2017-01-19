@@ -1,9 +1,13 @@
 import {Camera} from "ionic-native";
 import {LoadingController, ViewController, AlertController} from "ionic-angular";
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Photo} from "../domain/photo";
 import {DomSanitizer} from "@angular/platform-browser";
 import {PhotosService} from "../services/photos-service";
+import {AnimalsService} from "../services/animals-service";
+import {SpeciesService} from "../services/species-service";
+import {Animal} from "../domain/animal";
+import {Specie} from "../domain/specie";
 
 @Component({
   template:`
@@ -32,10 +36,26 @@ import {PhotosService} from "../services/photos-service";
           <button ion-button (click)="capture()"><ion-icon name="camera"> Appareil</ion-icon></button>
         </div>
         <div *ngIf="pic">
-          <ion-label color="primary" stacked>Ajouter une légende</ion-label>
-          <ion-input [(ngModel)]="pic.title" placeholder="Saisir une légende"></ion-input>       
+          <ion-label color="primary" stacked>Ajouter un titre</ion-label>
+          <ion-input [(ngModel)]="pic.title" placeholder="Saisir une légende"></ion-input>
+          <ion-label color="primary" stacked>Tagger un animal ?</ion-label>
+          <button ion-button color="primary" (click)="chooseAnimals()">Choisir un animal</button>
+          <div *ngIf="pic.animalIds.length > 0">
+            <animal-summary *ngFor="let animalId of pic.animalIds"
+                            [id]="animalId"
+                            [clickable]="false">
+            </animal-summary>
+          </div>
+          <ion-label color="primary" stacked>Tagger une espèce ?</ion-label>
+          <button ion-button color="primary" (click)="chooseSpecies()">Choisir une espèce</button>
+          <div *ngIf="pic.speciesIds.length > 0">
+            <specie-summary *ngFor="let specieId of pic.speciesIds"
+                            [id]="specieId"
+                            [clickable]="false">
+            </specie-summary>
+          </div>
         </div>
-        <button [disabled]="isNotSendable()" ion-button (click)="send()">Envoyer</button>
+        <button [disabled]="isNotSendable()" ion-button class="send" (click)="send()">Envoyer</button>
       </div>
     </ion-content>
   `,
@@ -55,17 +75,35 @@ import {PhotosService} from "../services/photos-service";
       margin-top: 10px;
       margin-bottom: 10px;
     }
+    .send {
+      float: right;
+      margin-top: 25px;
+    }
   `]
 })
-export class Uploader {
+export class Uploader implements OnInit {
   base64Image: string;
   imageUri: string;
   mode: string;
   pic: Photo;
+  animals: Array<Animal> = [];
+  species: Array<Specie> = [];
 
   constructor(public loadingCtrl: LoadingController, public viewCtrl: ViewController,
               private alertCtrl: AlertController, private domSanatizer: DomSanitizer,
-              private photosService: PhotosService) {
+              private photosService: PhotosService, private animalService: AnimalsService,
+              private specieService: SpeciesService) {
+  }
+
+  ngOnInit(): void {
+    this.animalService.load().subscribe(
+      animals => animals.forEach(_a => this.animals.push(_a)),
+      err => console.log(err)
+    );
+    this.specieService.load().subscribe(
+      species => species.forEach(_s => this.species.push(_s)),
+      err => console.log(err)
+    );
   }
 
   dismiss() {
@@ -90,10 +128,56 @@ export class Uploader {
   isNotSendable() {
     if (!this.pic) {
       return true;
-    } else if (this.pic && this.pic.title && this.pic.title.length == 0) {
+    } else if (this.pic && this.pic.title.length == 0) {
       return true;
     }
     return false;
+  }
+
+  chooseAnimals() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Quel animal apparaît sur l\'image ?');
+
+    this.animals.forEach(a =>
+      alert.addInput({
+        type: 'checkbox',
+        label: a.name,
+        value: a.id,
+        checked: this.pic.animalIds.indexOf(a.id) > -1
+      })
+    );
+    alert.addButton('Annuler');
+    alert.addButton({
+      text: 'Ajouter',
+      handler: data => {
+        this.pic.animalIds = [];
+        data.forEach(id => this.pic.animalIds.push(id));
+      }
+    });
+    alert.present();
+  }
+
+  chooseSpecies() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Quelle espèce apparaît sur l\'image ?');
+
+    this.species.forEach(s =>
+      alert.addInput({
+        type: 'checkbox',
+        label: s.name,
+        value: s.id,
+        checked: this.pic.speciesIds.indexOf(s.id) > -1
+      })
+    );
+    alert.addButton('Annuler');
+    alert.addButton({
+      text: 'Ajouter',
+      handler: data => {
+        this.pic.speciesIds = [];
+        data.forEach(id => this.pic.speciesIds.push(id));
+      }
+    });
+    alert.present();
   }
 
   private handleResult(d: any) {

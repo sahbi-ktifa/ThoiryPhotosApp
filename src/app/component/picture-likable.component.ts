@@ -1,26 +1,48 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, ElementRef, OnDestroy, OnInit} from "@angular/core";
 
 import {PhotosService} from "../services/photos-service";
-import {Platform, Events} from "ionic-angular";
+import {Platform, Events, Gesture} from "ionic-angular";
 import {AuthService} from "../services/auth-service";
 import {ENV} from "../app.module";
+declare var Hammer;
 
 @Component({
   selector: 'picture-likable',
   template:`
-    <img src="{{baseUrl}}/common/picture/{{picId}}/preview?format={{format}}" width="100%" (click)="like()"/>    
+    <img src="{{baseUrl}}/common/picture/{{picId}}/preview?format={{format}}" width="100%"/>    
   `,
   styles: []
 })
 
-export class PictureLikableComponent {
+export class PictureLikableComponent implements OnInit, OnDestroy {
   @Input('id') picId: String;
   @Input('format') format: String = "PREVIEW";
   baseUrl: String = ENV.API_URL;
+  el: HTMLElement;
+  pressGesture: Gesture;
 
-  constructor(private photoService: PhotosService, private platform: Platform, private events: Events, private authService: AuthService) {
+  constructor(private photoService: PhotosService, private platform: Platform,
+              private events: Events, private authService: AuthService,
+              private _el: ElementRef) {
     this.platform = platform;
     this.events = events;
+    this.el = _el.nativeElement;
+  }
+
+  ngOnInit() {
+    this.pressGesture = new Gesture(this.el, {
+      recognizers: [
+        [Hammer.Tap, {taps: 2}]
+      ]
+    });
+    this.pressGesture.listen();
+    this.pressGesture.on('tap', e => {
+      this.like();
+    });
+  }
+
+  ngOnDestroy() {
+    this.pressGesture.destroy();
   }
 
   like() {

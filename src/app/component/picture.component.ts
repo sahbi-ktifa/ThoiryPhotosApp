@@ -25,6 +25,9 @@ import {Photo} from "../domain/photo";
     </div>    
   `,
   styles: [`
+    .title {
+      margin-bottom: 5px;
+    }
     .infos .infos .user {
       font-style: italic;
       color: #82abc3;
