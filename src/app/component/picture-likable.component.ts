@@ -9,7 +9,8 @@ declare var Hammer;
 @Component({
   selector: 'picture-likable',
   template:`
-    <img src="{{baseUrl}}/common/picture/{{picId}}/preview?format={{format}}" width="100%"/>    
+    <img *ngIf="!loaded" src="../../assets/loading-img.png"/>
+    <img [hidden]="!loaded" (load)="finishLoad()" [src]="url" width="100%"/>      
   `,
   styles: []
 })
@@ -18,6 +19,8 @@ export class PictureLikableComponent implements OnInit, OnDestroy {
   @Input('id') picId: String;
   @Input('format') format: String = "PREVIEW";
   baseUrl: String = ENV.API_URL;
+  url: String;
+  loaded: boolean = false;
   el: HTMLElement;
   pressGesture: Gesture;
 
@@ -30,6 +33,7 @@ export class PictureLikableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.url = this.baseUrl + '/common/picture/' + this.picId + '/preview?format=' + this.format;
     this.pressGesture = new Gesture(this.el, {
       recognizers: [
         [Hammer.Tap, {taps: 2}]
@@ -37,12 +41,19 @@ export class PictureLikableComponent implements OnInit, OnDestroy {
     });
     this.pressGesture.listen();
     this.pressGesture.on('tap', e => {
-      this.like();
+      if (this.loaded) {
+        this.like();
+      }
     });
   }
 
   ngOnDestroy() {
     this.pressGesture.destroy();
+  }
+
+  finishLoad() {
+    console.log('load ! ');
+    this.loaded = true;
   }
 
   like() {
