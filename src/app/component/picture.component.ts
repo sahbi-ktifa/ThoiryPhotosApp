@@ -27,6 +27,7 @@ import {Photo} from "../domain/photo";
   styles: [`
     .title {
       margin-bottom: 5px;
+      font-weight: bold;
     }
     .infos .infos .user {
       font-style: italic;
@@ -53,7 +54,7 @@ export class PictureComponent {
 
   private calcDayInterval(date) {
     let val = Math.round(Math.abs((date - new Date().getTime()) / 3600000));
-    return val > 0 ? "Il y a " + val + " heure(s)" : "Maintenant";
+    return val > 0 ? "Il y a " + val + " heure(s)" : "A l'instant";
   }
 
   private dayDiff(d1)

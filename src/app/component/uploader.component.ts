@@ -28,8 +28,8 @@ import {Specie} from "../domain/specie";
       <div class="modal-content">
         <ion-label color="primary" class="label" stacked>Sélection de l'image à envoyer</ion-label>
         <div class="preview">
-          <img *ngIf="mode == 'capture'" [src]="domSanatizer.bypassSecurityTrustUrl(base64Image)"/>
-          <img *ngIf="mode == 'pick'" [src]="imageUri"/>          
+          <img class="img" *ngIf="mode == 'capture'" [src]="domSanatizer.bypassSecurityTrustUrl(base64Image)"/>
+          <img class="img" *ngIf="mode == 'pick'" [src]="imageUri"/>          
         </div>       
         <div class="buttons">
           <button ion-button (click)="pick()"><ion-icon name="image"> Galerie</ion-icon></button>
@@ -46,6 +46,7 @@ import {Specie} from "../domain/specie";
                             [clickable]="false">
             </animal-summary>
           </div>
+          <div class="breaker"></div>
           <ion-label color="primary" stacked>Tagger une espèce ?</ion-label>
           <button ion-button color="primary" (click)="chooseSpecies()">Choisir une espèce</button>
           <div *ngIf="pic.speciesIds.length > 0">
@@ -78,6 +79,15 @@ import {Specie} from "../domain/specie";
     .send {
       float: right;
       margin-top: 25px;
+    }
+    .img {
+      max-height: 250px;
+    }
+    .breaker {
+      display: block;
+      width: 100%;
+      height: 5px;
+      margin-top: 30px;
     }
   `]
 })

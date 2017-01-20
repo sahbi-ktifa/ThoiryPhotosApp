@@ -54,7 +54,7 @@ export class PhotosService {
   }
 
   upload(picture: Photo, imageUri: string) :Promise<Photo> {
-
+    let loading = this.buildLoading();
     let ft = new Transfer();
     let filename = Math.round(Math.random() * 100000) + ".jpg";
     let options = {
@@ -72,54 +72,11 @@ export class PhotosService {
     };
     return ft.upload(imageUri, ENV.API_URL + "/api/picture/" + picture.id + '/binary', options, true)
       .then((result: any) => {
+        loading.dismiss();
         return result;
       }).catch((error: any) => {
         console.log(error);
     });
-
-    /*return window.resolveLocalFileSystemURL(imageUri).then(file => {
-      let headers = new Headers();
-      headers.append()
-
-      let formData:FormData = new FormData();
-      formData.append('file', file, file.name);
-
-      return new Promise((resolve, reject) => {
-        this.http.post(ENV.API_URL + "/api/picture/" + picture.id + '/binary', formData, {
-          headers: headers
-        }).subscribe(
-          res => {
-            console.log(res.json());
-            resolve(res.json());
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      });*/
-      /*console.log(file);
-      return new Promise((resolve, reject) => {
-        let loading = this.buildLoading();
-        let xhr: XMLHttpRequest = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-          loading.dismiss();
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              resolve(<Photo>JSON.parse(xhr.response));
-            } else {
-              reject(xhr.response);
-            }
-          }
-        };
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.setRequestHeader();
-        xhr.open('POST', , true);
-
-        let formData = new FormData();
-        formData.append("file", file, file.name);
-        xhr.send(formData);
-      })*/
-    //}).catch(e => console.log(e));
   }
 
   private buildLoading() {
