@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, NavParams, Platform} from "ionic-angular";
 import {Specie} from "../../app/domain/specie";
 import {SpeciesService} from "../../app/services/species-service";
+import {InAppBrowser} from 'ionic-native';
 
 import {Animal} from "../../app/domain/animal";
 import {Photo} from "../../app/domain/photo";
@@ -20,7 +21,9 @@ export class SpecieDetails implements OnInit{
   page: number = 0;
   total: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public speciesService: SpeciesService, private photosService : PhotosService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public speciesService: SpeciesService, private photosService : PhotosService,
+              public platform: Platform) {
 
   }
 
@@ -44,6 +47,12 @@ export class SpecieDetails implements OnInit{
       .subscribe(
         results => this.handleResults(results),
         error =>  console.log(error));
+  }
+
+  launch(url) {
+    this.platform.ready().then(() => {
+      open(url, "_blank", "location=no");
+    });
   }
 
   private handleResults(results: any) {

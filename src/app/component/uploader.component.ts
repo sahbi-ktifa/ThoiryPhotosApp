@@ -97,11 +97,11 @@ export class Uploader implements OnInit {
 
   ngOnInit(): void {
     this.animalService.load().subscribe(
-      animals => animals.forEach(_a => this.animals.push(_a)),
+      animals => animals.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ).forEach(_a => this.animals.push(_a)),
       err => console.log(err)
     );
     this.specieService.load().subscribe(
-      species => species.forEach(_s => this.species.push(_s)),
+      species => species.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ).forEach(_s => this.species.push(_s)),
       err => console.log(err)
     );
   }

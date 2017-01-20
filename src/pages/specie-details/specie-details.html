@@ -13,6 +13,7 @@
   <h3>{{specie.name}}</h3>
   <p>{{specie.description}}</p>
   <p>{{specie.origin}}</p>
+  <button ion-button (click)="launch(specie.link)"><ion-icon name="search"></ion-icon> <span class="plus">Plus d'infos</span></button>
   <div class="animals" *ngIf="animals.length > 0">
     <p>Mes réprésentants :</p>
     <animal-summary *ngFor="let animal of animals"

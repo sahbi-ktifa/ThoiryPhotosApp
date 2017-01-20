@@ -29,7 +29,7 @@ export class Species {
   private loadSpecies() {
     this.speciesService.load()
       .subscribe(
-        species => this.species = species,
+        species => this.species = species.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ),
         error =>  this.errorMessage = <any>error);
   }
 }

@@ -28,7 +28,7 @@ export class Animals {
   private loadAnimals() {
     this.animalsService.load()
       .subscribe(
-        animals => this.animals = animals,
+        animals => this.animals = animals.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ),
         error =>  this.errorMessage = <any>error);
   }
 }
