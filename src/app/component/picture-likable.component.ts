@@ -9,7 +9,7 @@ declare var Hammer;
 @Component({
   selector: 'picture-likable',
   template:`
-    <img *ngIf="!loaded" src="../../assets/loading-img.png"/>
+    <img *ngIf="!loaded" src="assets/img/loading-img.png"/>
     <img [hidden]="!loaded" (load)="finishLoad()" [src]="url" width="100%"/>      
   `,
   styles: []
