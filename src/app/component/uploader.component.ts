@@ -37,7 +37,7 @@ import {Specie} from "../domain/specie";
         </div>
         <div *ngIf="pic">
           <ion-label color="primary" stacked>Ajouter un titre</ion-label>
-          <ion-input [(ngModel)]="pic.title" placeholder="Saisir une légende"></ion-input>
+          <ion-input [(ngModel)]="pic.title" placeholder="Saisir un titre"></ion-input>
           <ion-label color="primary" stacked>Tagger un animal ?</ion-label>
           <button ion-button color="primary" (click)="chooseAnimals()">Choisir un animal</button>
           <div *ngIf="pic.animalIds.length > 0">

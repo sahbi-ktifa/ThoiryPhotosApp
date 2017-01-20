@@ -76,6 +76,12 @@ export class AuthComponent implements OnInit {
         <ion-label color="primary" stacked>Choisir un nom d'utilisateur</ion-label>
         <ion-input [(ngModel)]="username" placeholder="Saisir un nom d'utilisateur"></ion-input>
         <button  [disabled]="!username || username.length < 4" ion-button (click)="register()">S'enregistrer</button>
+        <ion-label color="primary" stacked>Pourquoi s'enregistrer ?</ion-label>
+        <ul>
+          <li>Un compte utilisateur permet de "liker" les photos par un double tap</li>
+          <li>Un compte utilisateur ne nécessite qu'un nom d'utilisateur unique.</li>
+          <li>Un compte utilisateur permet de partager des photos (NB: En partageant une photo, j'accepte de céder les droits de ma photo)</li>         
+        </ul>
       </div>
     </ion-content>
   `,
