@@ -18,6 +18,9 @@
         <span class="name">{{specie.name}}</span>
         <span class="description">{{specie.description}}</span>
       </div>
+      <ion-icon class="type" color="secondary" name="bug" *ngIf="specie.type == 'bete'"></ion-icon>
+      <ion-icon class="type" color="danger" name="car" *ngIf="specie.type == 'voiture'"></ion-icon>
+      <ion-icon class="type" color="primary" name="walk" *ngIf="specie.type == 'pied'"></ion-icon>
     </button>
   </ion-list>
 </ion-content>

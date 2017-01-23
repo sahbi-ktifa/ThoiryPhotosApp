@@ -52,7 +52,6 @@ export class PictureLikableComponent implements OnInit, OnDestroy {
   }
 
   finishLoad() {
-    console.log('load ! ');
     this.loaded = true;
   }
 

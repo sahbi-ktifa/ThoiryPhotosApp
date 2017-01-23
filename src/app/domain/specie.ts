@@ -3,5 +3,6 @@ export class Specie {
     name: string;
     link: string;
     origin: string;
+    type: string;
     description: string;
 }

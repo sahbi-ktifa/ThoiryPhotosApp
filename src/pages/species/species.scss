@@ -17,11 +17,19 @@ page-species .item .infos {
 page-species .item .infos .name {
   width: 100%;
   display: block;
+  padding-right: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 page-species .item .infos .description {
   width: 100%;
   display: block;
   color: lightgray;
   font-size: 12px;
+}
+.item .type {
+  position: absolute;
+  font-size: 25px;
+  right: 10px;
 }
 
