@@ -11,7 +11,7 @@ import {Photo} from "../domain/photo";
     <div class="title">{{pic.title}}</div> 
     <picture-likable [id]="pic.id"></picture-likable>
     <div class="infos">
-      <div class="infos">Par <span class="user">{{pic.username}}</span> - <span class="date">{{calcInterval(pic.creationDate)}}</span> <picture-liked [liked]="pic.liked" [id]="pic.id"></picture-liked></div>
+      <div class="infos">Par <span class="user">{{pic.username}}</span>&nbsp;&nbsp;<span class="date">{{calcInterval(pic.creationDate)}}</span> <picture-liked [liked]="pic.liked" [id]="pic.id"></picture-liked></div>
       <div class="animals" *ngIf="pic.animalIds.length > 0">
           <animal-summary *ngFor="let animalId of pic.animalIds"
                 [id]="animalId">
@@ -27,7 +27,11 @@ import {Photo} from "../domain/photo";
   styles: [`
     .title {
       margin-bottom: 5px;
+      margin-left: 5px;
       font-weight: bold;
+    }
+    .infos {
+      margin-left: 5px;
     }
     .infos .infos .user {
       font-style: italic;
@@ -36,6 +40,7 @@ import {Photo} from "../domain/photo";
     .infos .infos .date {
       color: #b7b7b7;
       float: right;
+      margin-right: 5px;
     }
   `]
 })

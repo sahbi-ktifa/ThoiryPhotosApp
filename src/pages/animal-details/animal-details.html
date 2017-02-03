@@ -11,7 +11,7 @@
 <ion-content padding>
   <img class="img" *ngIf="animalUrl" src="{{animalUrl}}"/>
   <h3>Nom : {{animal.name}}</h3>
-  <p>Age : {{getAge(animal.birthYear)}} an(s)</p>
+  <p *ngIf="animal.birthYear">Age : {{getAge(animal.birthYear)}} an(s)</p>
   <p><span class="label">Espèce : </span><specie-summary *ngIf="animalUrl" [id]="animal.specieId"></specie-summary></p>
   <div class="sibling" *ngIf="siblings.length > 0">
     <p>Mes frères et soeurs :</p>
