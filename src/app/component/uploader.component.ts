@@ -225,21 +225,29 @@ export class Uploader implements OnInit {
 
   private uploadBinary(picture: Photo) {
     this.photosService.upload(picture, this.imageUri).then(
-      res => this.complete()
+      res => this.complete(res)
     );
   }
 
-  private complete() {
-    let alert = this.alertCtrl.create({
-      title: "Envoi réussi",
-      buttons: [{
-        text: 'OK',
-        handler: data => {
-          this.dismiss();
-        }
-      }]
-    });
-    alert.present();
+  private complete(res) {
+    if (JSON.stringify(res.body).indexOf('Acceptable geolocation not found') > -1) {
+      let alert = this.alertCtrl.create({
+        title: "La photo que vous avez essayé d'envoyer ne semble pas avoir été prise dans le zoo",
+        buttons: [{ text: 'OK' }]
+      });
+      alert.present();
+    } else {
+      let alert = this.alertCtrl.create({
+        title: "Envoi réussi",
+        buttons: [{
+          text: 'OK',
+          handler: data => {
+            this.dismiss();
+          }
+        }]
+      });
+      alert.present();
+    }
   }
 
   private handleError(error: any) {

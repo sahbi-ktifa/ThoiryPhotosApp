@@ -2,12 +2,11 @@ import {Injectable} from "@angular/core";
 import {Http, Response, Headers} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
-
 import {AuthService} from "./auth-service";
 import {ENV} from "../app.module";
-import {LoadingController} from "ionic-angular";
+import {AlertController, LoadingController} from "ionic-angular";
 import {Photo} from "../domain/photo";
-import {File, Transfer} from "ionic-native";
+import {Transfer} from "ionic-native";
 
 /*
   Generated class for the SpeciesService provider.
@@ -18,7 +17,8 @@ import {File, Transfer} from "ionic-native";
 @Injectable()
 export class PhotosService {
 
-  constructor(public http: Http, private authService: AuthService, private loadingCtrl: LoadingController) {
+  constructor(public http: Http, private authService: AuthService,
+              private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
   }
 
   browse(page: number): Observable<any> {
@@ -75,8 +75,9 @@ export class PhotosService {
         loading.dismiss();
         return result;
       }).catch((error: any) => {
-        console.log(error);
-    });
+        loading.dismiss()
+        return error;
+      });
   }
 
   private buildLoading() {
