@@ -1,7 +1,7 @@
 # Thoiry Photos Client
 Application cliente Thoiry Photos réalisé avec **AngularJS 2** with **TypeScript**
 
-###Install
+### Install
 How to install :
 * Ionic and Cordova framework must be installed:
 
@@ -19,7 +19,7 @@ How to install :
 
 `$ ionic cordova emulate -l -c android`
 
-###Build
+### Build
 
 * First build app and next, we can find our unsigned APK file in `platforms/android/build/outputs/apk`. 
 
