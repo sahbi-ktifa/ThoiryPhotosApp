@@ -28,8 +28,7 @@ import {Specie} from "../domain/specie";
       <div class="modal-content">
         <ion-label color="primary" class="label" stacked>Sélection de l'image à envoyer</ion-label>
         <div class="preview">
-          <!--<img class="img" *ngIf="mode == 'capture'" [src]="domSanatizer.bypassSecurityTrustUrl(base64Image)"/>-->
-          <img class="img" *ngIf="mode == 'pick'" [src]="imageUri"/>          
+          <img class="img" *ngIf="mode == 'pick'" [src]="domSanatizer.bypassSecurityTrustUrl(imageUri)"/>
         </div>       
         <div class="buttons">
           <button ion-button (click)="pick()"><ion-icon name="image"> Galerie</ion-icon></button>
@@ -92,7 +91,6 @@ import {Specie} from "../domain/specie";
   `]
 })
 export class Uploader implements OnInit {
-  base64Image: string;
   imageUri: string;
   mode: string;
   pic: Photo;
