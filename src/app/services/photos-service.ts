@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Http, Response, Headers} from "@angular/http";
+import {Headers, Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {AuthService} from "./auth-service";
 import {ENV} from "../app.module";
-import {AlertController, LoadingController} from "ionic-angular";
+import {AlertController, Loading, LoadingController} from "ionic-angular";
 import {Photo} from "../domain/photo";
 import {Transfer} from "ionic-native";
 
@@ -55,6 +55,10 @@ export class PhotosService {
 
   upload(picture: Photo, imageUri: string) :Promise<Photo> {
     let loading = this.buildLoading();
+    return this.verifyGeoLoc(picture, imageUri, loading);
+  }
+
+  private doUpload(imageUri: string, picture: Photo, loading: Loading) {
     let ft = new Transfer();
     let filename = Math.round(Math.random() * 100000) + ".jpg";
     let options = {
@@ -63,8 +67,8 @@ export class PhotosService {
       mimeType: 'image/jpeg',
       chunkedMode: false,
       headers: {
-        'Content-Type' : undefined,
-        'Authorization' : 'Basic ' + btoa(this.authService.retrieveUser().username + ':' + this.authService.retrieveUser().passwd)
+        'Content-Type': undefined,
+        'Authorization': 'Basic ' + btoa(this.authService.retrieveUser().username + ':' + this.authService.retrieveUser().passwd)
       },
       params: {
         fileName: filename
@@ -75,8 +79,29 @@ export class PhotosService {
         loading.dismiss();
         return result;
       }).catch((error: any) => {
-        loading.dismiss()
+        loading.dismiss();
         return error;
+      });
+  }
+
+  private verifyGeoLoc(picture: Photo, imageUri: string, loading: Loading) {
+    let ft = new Transfer();
+    let filename = Math.round(Math.random() * 100000) + ".jpg";
+    let options = {
+      fileKey: 'file',
+      fileName: filename,
+      mimeType: 'image/jpeg',
+      chunkedMode: false,
+      params: {
+        fileName: filename
+      }
+    };
+    return ft.upload(imageUri, ENV.API_GEOLOC_URL, options, true)
+      .then((result: any) => {
+        return this.doUpload(imageUri, picture, loading);;
+      }).catch((error: any) => {
+        loading.dismiss();
+        return "No geolocation found.";
       });
   }
 

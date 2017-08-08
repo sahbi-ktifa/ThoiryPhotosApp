@@ -28,12 +28,12 @@ import {Specie} from "../domain/specie";
       <div class="modal-content">
         <ion-label color="primary" class="label" stacked>Sélection de l'image à envoyer</ion-label>
         <div class="preview">
-          <img class="img" *ngIf="mode == 'capture'" [src]="domSanatizer.bypassSecurityTrustUrl(base64Image)"/>
+          <!--<img class="img" *ngIf="mode == 'capture'" [src]="domSanatizer.bypassSecurityTrustUrl(base64Image)"/>-->
           <img class="img" *ngIf="mode == 'pick'" [src]="imageUri"/>          
         </div>       
         <div class="buttons">
           <button ion-button (click)="pick()"><ion-icon name="image"> Galerie</ion-icon></button>
-          <button ion-button (click)="capture()"><ion-icon name="camera"> Appareil</ion-icon></button>
+          <!--<button ion-button (click)="capture()"><ion-icon name="camera"> Appareil</ion-icon></button>-->
         </div>
         <div *ngIf="pic">
           <ion-label color="primary" stacked>Ajouter un titre</ion-label>
@@ -191,13 +191,9 @@ export class Uploader implements OnInit {
   }
 
   private handleResult(d: any) {
-    if (d.indexOf('file://') > -1) {
-      this.imageUri = d;
-      this.mode = 'pick';
-    } else {
-      this.base64Image = 'data:image/jpeg;base64,' + d;
-      this.mode = 'capture';
-    }
+    //console.log(d);
+    this.imageUri = d;
+    this.mode = 'pick';
     this.pic = new Photo();
     this.pic.title = '';
   }
@@ -205,14 +201,14 @@ export class Uploader implements OnInit {
   private setOptions(srcType) {
     return {
       // Some common settings are 20, 50, and 100
-      quality: 50,
-      destinationType: Camera.DestinationType.FILE_URI,
+      quality: 100,
+      destinationType: Camera.DestinationType.NATIVE_URI,
       // In this app, dynamically set the picture source, Camera or photo gallery
       sourceType: srcType,
       encodingType: Camera.EncodingType.JPEG,
       mediaType: Camera.MediaType.PICTURE,
-      allowEdit: true,
-      correctOrientation: true  //Corrects Android orientation quirks
+      allowEdit: false//,
+      //correctOrientation: true  //Corrects Android orientation quirks
     };
   }
 
@@ -225,21 +221,34 @@ export class Uploader implements OnInit {
 
   private uploadBinary(picture: Photo) {
     this.photosService.upload(picture, this.imageUri).then(
-      res => this.complete()
+      res => this.complete(res)
     );
   }
 
-  private complete() {
-    let alert = this.alertCtrl.create({
-      title: "Envoi réussi",
-      buttons: [{
-        text: 'OK',
-        handler: data => {
-          this.dismiss();
-        }
-      }]
-    });
-    alert.present();
+  private complete(error : any) {
+    if (error === 'No geolocation found.') {
+      let alert = this.alertCtrl.create({
+        title: "Envoi refusé, la photo ne semble pas avoir été prise dans le zoo. Veillez à activer la géolocalisation.",
+        buttons: [{
+          text: 'OK',
+          handler: data => {
+            this.dismiss();
+          }
+        }]
+      });
+      alert.present();
+    } else {
+      let alert = this.alertCtrl.create({
+        title: "Envoi réussi",
+        buttons: [{
+          text: 'OK',
+          handler: data => {
+            this.dismiss();
+          }
+        }]
+      });
+      alert.present();
+    }
   }
 
   private handleError(error: any) {
