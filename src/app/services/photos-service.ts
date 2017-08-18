@@ -4,7 +4,7 @@ import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 import {AuthService} from "./auth-service";
 import {ENV} from "../app.module";
-import {AlertController, Loading, LoadingController} from "ionic-angular";
+import {Loading, LoadingController} from "ionic-angular";
 import {Photo} from "../domain/photo";
 import {Transfer} from "ionic-native";
 
@@ -18,7 +18,7 @@ import {Transfer} from "ionic-native";
 export class PhotosService {
 
   constructor(public http: Http, private authService: AuthService,
-              private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+              private loadingCtrl: LoadingController) {
   }
 
   browse(page: number): Observable<any> {
@@ -53,7 +53,7 @@ export class PhotosService {
       .catch(e => PhotosService.handleError(e, loading));
   }
 
-  upload(picture: Photo, imageUri: string) :Promise<Photo> {
+  upload(picture: Photo, imageUri: string) : Promise<any> {
     let loading = this.buildLoading();
     return this.verifyGeoLoc(picture, imageUri, loading);
   }
