@@ -1,5 +1,5 @@
-import {NgModule, ErrorHandler} from "@angular/core";
-import {IonicApp, IonicModule, IonicErrorHandler} from "ionic-angular";
+import {ErrorHandler, NgModule} from "@angular/core";
+import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
 import {MyApp} from "./app.component";
 import {Photos} from "../pages/photos/photos";
 import {Species} from "../pages/species/species";
@@ -16,7 +16,6 @@ import {AuthComponent, Register} from "./component/auth.component";
 import {AuthService} from "./services/auth-service";
 import {PictureLikedComponent} from "./component/picture-liked.component";
 import {PictureComponent} from "./component/picture.component";
-import {PictureInfiniteComponent} from "./component/picture-infinite.component";
 import {PictureUploaderComponent} from "./component/picture-uploader.component";
 import {Uploader} from "./component/uploader.component";
 
@@ -65,6 +64,6 @@ export class AppModule {}
 
 export const ENV = {
   API_URL    : 'http://thoiryphotos-prod.herokuapp.com',
-  API_GEOLOC_URL    : 'https://image-geoloc.herokuapp.com/api/geo'
+  API_GEOLOC_URL    : 'https://image-geoloc.herokuapp.com/api/geo/within'
   //API_URL    : 'http://localhost:8080'
 };

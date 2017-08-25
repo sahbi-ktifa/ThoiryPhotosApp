@@ -33,6 +33,7 @@ import {Specie} from "../domain/specie";
         <div class="buttons">
           <button ion-button (click)="pick()"><ion-icon name="image"> Galerie</ion-icon></button>
           <!--<button ion-button (click)="capture()"><ion-icon name="camera"> Appareil</ion-icon></button>-->
+          <button [disabled]="isNotSendable()" ion-button color="secondary" (click)="send()">Envoyer</button>
         </div>
         <div *ngIf="pic">
           <ion-label color="primary" stacked>Ajouter un titre</ion-label>
@@ -55,7 +56,6 @@ import {Specie} from "../domain/specie";
             </specie-summary>
           </div>
         </div>
-        <button [disabled]="isNotSendable()" ion-button class="send" (click)="send()">Envoyer</button>
       </div>
     </ion-content>
   `,
@@ -74,10 +74,6 @@ import {Specie} from "../domain/specie";
       text-align: center;
       margin-top: 10px;
       margin-bottom: 10px;
-    }
-    .send {
-      float: right;
-      margin-top: 25px;
     }
     .img {
       max-height: 250px;
@@ -198,15 +194,11 @@ export class Uploader implements OnInit {
 
   private setOptions(srcType) {
     return {
-      // Some common settings are 20, 50, and 100
-      quality: 100,
       destinationType: Camera.DestinationType.NATIVE_URI,
-      // In this app, dynamically set the picture source, Camera or photo gallery
       sourceType: srcType,
-      encodingType: Camera.EncodingType.JPEG,
       mediaType: Camera.MediaType.PICTURE,
       allowEdit: false//,
-      //correctOrientation: true  //Corrects Android orientation quirks
+      //correctOrientation: true  //Corrects Android orientation quirks but create new image
     };
   }
 
@@ -225,28 +217,25 @@ export class Uploader implements OnInit {
 
   private complete(error : any) {
     if (error === 'No geolocation found.') {
-      let alert = this.alertCtrl.create({
-        title: "Envoi refusé, la photo ne semble pas avoir été prise dans le zoo. Veillez à activer la géolocalisation.",
-        buttons: [{
-          text: 'OK',
-          handler: data => {
-            this.dismiss();
-          }
-        }]
-      });
-      alert.present();
+      this.showCompleteAlert("Envoi refusé, la photo ne semble pas avoir été prise dans le zoo. Veillez à activer la géolocalisation.");
+    } else if (error && error.length > 0) {
+      this.showCompleteAlert(error);
     } else {
-      let alert = this.alertCtrl.create({
-        title: "Envoi réussi",
-        buttons: [{
-          text: 'OK',
-          handler: data => {
-            this.dismiss();
-          }
-        }]
-      });
-      alert.present();
+      this.showCompleteAlert("Envoi réussi.");
     }
+  }
+
+  private showCompleteAlert(msg: string) {
+    let alert = this.alertCtrl.create({
+      title: msg,
+      buttons: [{
+        text: 'OK',
+        handler: data => {
+          this.dismiss();
+        }
+      }]
+    });
+    alert.present();
   }
 
   private handleError(error: any) {

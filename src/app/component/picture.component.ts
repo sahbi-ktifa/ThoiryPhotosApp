@@ -1,8 +1,4 @@
 import {Component, Input} from "@angular/core";
-
-import {PhotosService} from "../services/photos-service";
-import {Platform, Events} from "ionic-angular";
-import {AuthService} from "../services/auth-service";
 import {Photo} from "../domain/photo";
 
 @Component({

@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {NavController, NavParams, Platform} from "ionic-angular";
 import {Specie} from "../../app/domain/specie";
 import {SpeciesService} from "../../app/services/species-service";
-import {InAppBrowser} from 'ionic-native';
 
 import {Animal} from "../../app/domain/animal";
 import {Photo} from "../../app/domain/photo";
