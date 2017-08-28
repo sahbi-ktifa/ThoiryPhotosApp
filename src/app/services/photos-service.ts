@@ -93,10 +93,14 @@ export class PhotosService {
       mimeType: 'image/jpeg',
       chunkedMode: false,
       params: {
-        fileName: filename
+        fileName: filename,
+        latitudeA: 48.87,
+        longitudeA: 1.76,
+        latitudeB: 48.85,
+        longitudeB: 1.81
       }
     };
-    return ft.upload(imageUri, ENV.API_GEOLOC_URL + "?latitudeA=48.87&longitudeA=1.76&latitudeB=48.85&longitudeB=1.81", options, true)
+    return ft.upload(imageUri, ENV.API_GEOLOC_URL, options, true)
       .then((result: any) => {
         return this.doUpload(imageUri, picture, loading);;
       }).catch((error: any) => {

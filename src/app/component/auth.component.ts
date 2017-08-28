@@ -80,7 +80,8 @@ export class AuthComponent implements OnInit {
         <ul>
           <li>Un compte utilisateur permet de "liker" les photos par un double tap</li>
           <li>Un compte utilisateur ne nécessite qu'un nom d'utilisateur unique.</li>
-          <li>Un compte utilisateur permet de partager des photos (NB: En partageant une photo, j'accepte de céder les droits de ma photo)</li>         
+          <li>Un compte utilisateur permet de partager des photos (NB: En partageant une photo, j'accepte de céder les droits de ma photo).</li>         
+          <li>Les photos doivent posséder les informations de géolocalisation du zoo.</li>         
         </ul>
       </div>
     </ion-content>

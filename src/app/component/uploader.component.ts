@@ -29,6 +29,7 @@ import {Specie} from "../domain/specie";
         <ion-label color="primary" class="label" stacked>Sélection de l'image à envoyer</ion-label>
         <div class="preview">
           <img class="img" *ngIf="mode == 'pick'" [src]="domSanatizer.bypassSecurityTrustUrl(imageUri)"/>
+          <i *ngIf="mode == 'pick'">La photo peut apparaître avec une mauvaise orientation, cela sera corrigé après l'envoi.</i>
         </div>       
         <div class="buttons">
           <button ion-button (click)="pick()"><ion-icon name="image"> Galerie</ion-icon></button>
