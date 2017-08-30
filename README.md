@@ -23,7 +23,7 @@ How to install :
 
 * First build app and next, we can find our unsigned APK file in `platforms/android/build/outputs/apk`. 
 
-`$ ionic cordova build --release --prod android`
+`$ ionic cordova build --release android`
 
 * Sign JAR
 
