@@ -63,7 +63,7 @@ import {Uploader} from "./component/uploader.component";
 export class AppModule {}
 
 export const ENV = {
-  API_URL    : 'http://thoiryphotos-prod.herokuapp.com',
+  API_URL    : 'http://thoiryphotos-dev.herokuapp.com',
   API_GEOLOC_URL    : 'https://image-geoloc.herokuapp.com/api/geo/within'
   //API_URL    : 'http://localhost:8080'
 };

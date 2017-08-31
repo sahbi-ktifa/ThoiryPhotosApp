@@ -73,11 +73,14 @@ import {Specie} from "../domain/specie";
     }
     .buttons {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 25px;
       margin-bottom: 10px;
     }
-    .img {
+    .preview .img {
       max-height: 250px;
+    }
+    .preview i {
+      display: block;
     }
     .breaker {
       display: block;
