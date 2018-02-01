@@ -50,7 +50,18 @@ export class PictureComponent {
 
   public calcInterval(date) {
     let dayInterval = this.dayDiff(new Date(date));
-    return Number(dayInterval) > 0 ? "Il y a " + dayInterval + " jour(s)" : this.calcDayInterval(date);
+    if (Number(dayInterval) > 30) {
+      return this.calcMonthInterval(dayInterval)
+    } else if (Number(dayInterval) > 0) {
+      return "Il y a " + dayInterval + " jour(s)"
+    } else {
+      return this.calcDayInterval(date);
+    }
+  }
+
+  private calcMonthInterval(dayInterval) {
+    let val = Math.round(Math.abs(dayInterval / 30));
+    return "Il y a " + val + " moi(s)";
   }
 
   private calcDayInterval(date) {
